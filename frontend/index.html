@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="loginView" class="auth-shell">
+    <div class="auth-card">
+      <div class="brand-mark">◆</div>
+      <p class="eyebrow">MINI PROJECT MANAGER</p>
+      <h1>Log ind</h1>
+      <p class="muted">Brug en bruger, der findes i PostgreSQL-databasen.</p>
+      <form id="loginForm">
+        <label>Email<input id="email" type="email" autocomplete="username" required value="admin@example.com"></label>
+        <label>Password<div class="password-wrap"><input id="password" type="password" autocomplete="current-password" required value="Admin123!"><button type="button" id="togglePassword">Vis</button></div></label>
+        <button class="primary full" type="submit">Log ind</button>
+      </form>
+      <div id="loginError" class="error hidden"></div>
+      <div class="demo-box"><strong>Demo-bruger</strong><br>admin@example.com<br>Admin123!</div>
+      <p class="tiny">Login kontrolleres af backendens AuthService mod <code>users</code>-tabellen.</p>
+    </div>
+  </div>
+
+  <div id="appView" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark small">◆</div><span>Project Manager</span></div>
+      <nav>
+        <button class="nav-item active">⌂ <span>Projects</span></button>
+      </nav>
+      <div class="sidebar-user"><div class="avatar" id="userAvatar">A</div><div><strong id="userEmail">-</strong><span id="userTenant">-</span></div></div>
+      <button id="logoutBtn" class="logout">↪ Log ud</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div><span class="status-dot"></span> Forbundet til API <span class="api-url">http://localhost:3000/graphql</span></div><div class="user-chip" id="topUser">-</div></header>
+      <section class="content">
+        <div class="stats">
+          <div class="stat"><span>◼</span><div><b id="totalCount">0</b><small>Total projekter</small></div></div>
+          <div class="stat"><span>▶</span><div><b id="activeCount">0</b><small>Aktive projekter</small></div></div>
+          <div class="stat"><span>●</span><div><b id="highCount">0</b><small>Høj prioritet</small></div></div>
+        </div>
+        <div class="workspace">
+          <section class="panel projects-panel">
+            <div class="panel-head"><div><p class="eyebrow">OVERSIGT</p><h2>Projekter</h2></div><button id="newProjectBtn" class="primary">＋ Opret projekt</button></div>
+            <div class="filters"><input id="search" placeholder="Søg i projekter..."><select id="statusFilter"><option value="">Alle statusser</option><option value="PLANNED">Planlagt</option><option value="IN_PROGRESS">I gang</option><option value="DONE">Færdig</option><option value="CANCELLED">Annulleret</option></select><select id="priorityFilter"><option value="">Alle prioriteter</option><option value="LOW">Lav</option><option value="MEDIUM">Mellem</option><option value="HIGH">Høj</option></select></div>
+            <div id="projectList" class="project-list"></div>
+            <div class="pagination"><button id="prevPage">← Forrige</button><span id="pageInfo">Side 1</span><button id="nextPage">Næste →</button></div>
+          </section>
+          <section class="panel details-panel"><div id="detailsEmpty" class="empty"><div class="empty-icon">◫</div><h3>Vælg et projekt</h3><p>Vælg et projekt til venstre for at se detaljer og faser.</p></div><div id="details" class="hidden"></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h3 id="modalTitle">Opret projekt</h3><button id="closeModal">×</button></div><form id="entityForm"></form></div></div>
+  <script src="app.js"></script>
+</body>
+</html>

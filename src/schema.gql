@@ -1,0 +1,136 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPayloadType {
+  accessToken: String!
+  user: UserType!
+}
+
+input CreatePhaseInput {
+  order: Int!
+  projectId: ID!
+  status: PhaseStatus
+  title: String!
+}
+
+input CreateProjectInput {
+  description: String
+  priority: ProjectPriority
+  status: ProjectStatus
+  title: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createPhase(input: CreatePhaseInput!): ID!
+  createProject(input: CreateProjectInput!): ID!
+  deletePhase(id: ID!): ID!
+  deleteProject(id: ID!): ID!
+  login(input: LoginInput!): AuthPayloadType!
+  register(input: RegisterInput!): AuthPayloadType!
+  updatePhase(input: UpdatePhaseInput!): ID!
+  updateProject(input: UpdateProjectInput!): ID!
+}
+
+type PhasePageType {
+  count: Int!
+  data: [PhaseType!]!
+}
+
+enum PhaseStatus {
+  DONE
+  IN_PROGRESS
+  PENDING
+}
+
+type PhaseSummaryType {
+  createdAt: String!
+  id: ID!
+  order: Int!
+  projectId: ID!
+  status: PhaseStatus!
+  tenantId: ID!
+  title: String!
+  updatedAt: String!
+}
+
+type PhaseType {
+  createdAt: String!
+  id: ID!
+  order: Int!
+  projectId: ID!
+  status: PhaseStatus!
+  tenantId: ID!
+  title: String!
+  updatedAt: String!
+}
+
+type ProjectPageType {
+  count: Int!
+  data: [ProjectType!]!
+}
+
+enum ProjectPriority {
+  HIGH
+  LOW
+  MEDIUM
+}
+
+enum ProjectStatus {
+  CANCELLED
+  DONE
+  IN_PROGRESS
+  PLANNED
+}
+
+type ProjectType {
+  createdAt: String!
+  description: String
+  id: ID!
+  phases: [PhaseSummaryType!]!
+  priority: ProjectPriority!
+  status: ProjectStatus!
+  tenantId: ID!
+  title: String!
+  updatedAt: String!
+}
+
+type Query {
+  phase(id: ID!): PhaseType!
+  phases(limit: Int = 10, projectId: ID, skip: Int = 0, status: PhaseStatus): PhasePageType!
+  project(id: ID!): ProjectType!
+  projects(limit: Int = 10, priority: ProjectPriority, search: String, skip: Int = 0, status: ProjectStatus): ProjectPageType!
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+  tenantId: String!
+}
+
+input UpdatePhaseInput {
+  id: ID!
+  order: Int
+  projectId: ID
+  status: PhaseStatus
+  title: String
+}
+
+input UpdateProjectInput {
+  description: String
+  id: ID!
+  priority: ProjectPriority
+  status: ProjectStatus
+  title: String
+}
+
+type UserType {
+  email: String!
+  id: String!
+  tenantId: String!
+}
